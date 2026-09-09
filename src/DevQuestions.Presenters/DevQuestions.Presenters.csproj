@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevQuestions.Contracts\DevQuestions.Contracts.csproj" />
+    <ProjectReference Include="..\DevQuestions.Domain\DevQuestions.Domain.csproj" />
+  </ItemGroup>
+</Project>

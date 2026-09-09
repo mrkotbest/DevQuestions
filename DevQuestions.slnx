@@ -1,5 +1,13 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
   <Folder Name="/src/">
+    <Project Path="src/DevQuestions.Contracts/DevQuestions.Contracts.csproj" Id="aed8af90-fd42-4bcf-8a96-d1d306452a2a" />
     <Project Path="src/DevQuestions.Domain/DevQuestions.Domain.csproj" />
+    <Project Path="src/DevQuestions.Presenters/DevQuestions.Presenters.csproj" />
+    <Project Path="src/DevQuestions.Web/DevQuestions.Web.csproj" />
   </Folder>
 </Solution>
+
