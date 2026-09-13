@@ -7,6 +7,7 @@
     <ProjectReference Include="..\DevQuestions.Application\DevQuestions.Application.csproj" />
     <ProjectReference Include="..\DevQuestions.Contracts\DevQuestions.Contracts.csproj" />
     <ProjectReference Include="..\DevQuestions.Domain\DevQuestions.Domain.csproj" />
+    <ProjectReference Include="..\DevQuestions.Infrastructure.PostgreSql\DevQuestions.Infrastructure.PostgreSql.csproj" />
     <ProjectReference Include="..\DevQuestions.Presenters\DevQuestions.Presenters.csproj" />
   </ItemGroup>
 </Project>

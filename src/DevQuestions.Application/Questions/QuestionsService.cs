@@ -29,6 +29,9 @@ public class QuestionsService : IQuestionsService
             throw new ValidationException(validationResult.Errors);
         }
 
+        // Check if the question already exists (this is just a placeholder, you might want to implement a proper check)
+        var exsitedQuestion = await _questionsRepository.GetByIdAsync(Guid.Empty, cancellationToken);
+
         int openUserQuestionsCount = await _questionsRepository.GetOpenUserQuestionsCountAsync(questionDto.UserId, cancellationToken);
         if (openUserQuestionsCount > 3)
         {
@@ -47,7 +50,12 @@ public class QuestionsService : IQuestionsService
 
         await _questionsRepository.AddAsync(question, cancellationToken);
 
-        _logger.LogInformation("Question created with ID: {QuestionId}", questionId);
+        // TODO: index the question in the search provider once the Elasticsearch adapter is implemented
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Question created with ID: {QuestionId}", questionId);
+        }
 
         return questionId;
     }
