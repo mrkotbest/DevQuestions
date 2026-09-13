@@ -1,6 +1,6 @@
 using DevQuestions.Infrastructure.PostgreSql.Seeders;
 
-namespace DevQuestions.Web;
+namespace DevQuestions.Web.Seeders;
 
 public static class SeederExtensions
 {

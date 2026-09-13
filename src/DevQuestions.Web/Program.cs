@@ -1,10 +1,13 @@
 using DevQuestions.Web;
+using DevQuestions.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-DependencyInjection.AddProgramDependencies(builder.Services);
+builder.Services.AddProgramDependencies();
 
 var app = builder.Build();
+
+app.UseExceptionMiddleware();
 
 if (app.Environment.IsDevelopment())
 {

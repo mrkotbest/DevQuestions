@@ -1,3 +1,5 @@
+using DevQuestions.Application.Extensions;
+using DevQuestions.Application.Questions.Failures.Exceptions;
 using DevQuestions.Contracts.Questions;
 using DevQuestions.Domain.Questions;
 using FluentValidation;
@@ -26,7 +28,7 @@ public class QuestionsService : IQuestionsService
         var validationResult = await _createQuestionValidator.ValidateAsync(questionDto, cancellationToken);
         if (!validationResult.IsValid)
         {
-            throw new ValidationException(validationResult.Errors);
+            throw new QuestionValidationException(validationResult.ToErrors());
         }
 
         // Check if the question already exists (this is just a placeholder, you might want to implement a proper check)
@@ -35,7 +37,7 @@ public class QuestionsService : IQuestionsService
         int openUserQuestionsCount = await _questionsRepository.GetOpenUserQuestionsCountAsync(questionDto.UserId, cancellationToken);
         if (openUserQuestionsCount > 3)
         {
-            throw new InvalidOperationException("A user cannot have more than 3 open questions.");
+            throw new TooManyQuestionsException();
         }
 
         var questionId = Guid.NewGuid();
