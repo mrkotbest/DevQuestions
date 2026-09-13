@@ -22,6 +22,7 @@ csharp_indent_switch_labels = true
 csharp_prefer_braces = true:suggestion
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = false
+csharp_insert_final_comma_in_multiline_blocks = false
 
 # New lines
 csharp_new_line_before_catch = true
@@ -58,9 +59,10 @@ csharp_preferred_modifier_order = public, private, protected, internal, file, st
 csharp_using_directive_placement = outside_namespace:error
 
 # Type declaration preferences
+csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_var_elsewhere = false:suggestion
 csharp_style_var_for_built_in_types = false:suggestion
-csharp_style_var_when_type_is_apparent = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
 
 # Expression-bodied members
 csharp_style_expression_bodied_accessors = true:suggestion
@@ -186,8 +188,8 @@ dotnet_diagnostic.SA1206.severity = none
 dotnet_diagnostic.SA1309.severity = none
 dotnet_diagnostic.SA1310.severity = none
 dotnet_diagnostic.SA1313.severity = none
+dotnet_diagnostic.SA1413.severity = none
 dotnet_diagnostic.SA1503.severity = none
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1601.severity = none
 dotnet_diagnostic.SA1633.severity = none
-

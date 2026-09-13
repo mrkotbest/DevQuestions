@@ -4,6 +4,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevQuestions.Application\DevQuestions.Application.csproj" />
     <ProjectReference Include="..\DevQuestions.Contracts\DevQuestions.Contracts.csproj" />
     <ProjectReference Include="..\DevQuestions.Domain\DevQuestions.Domain.csproj" />
     <ProjectReference Include="..\DevQuestions.Presenters\DevQuestions.Presenters.csproj" />

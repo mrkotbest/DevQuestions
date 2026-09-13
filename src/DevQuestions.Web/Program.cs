@@ -1,7 +1,8 @@
+using DevQuestions.Web;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+DependencyInjection.AddProgramDependencies(builder.Services);
 
 var app = builder.Build();
 

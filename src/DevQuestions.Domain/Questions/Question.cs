@@ -4,11 +4,11 @@ public class Question
 {
     public Guid Id { get; set; }
 
-    public required string Title { get; set; }
+    public string Title { get; set; }
 
-    public required string Text { get; set; }
+    public string Text { get; set; }
 
-    public required Guid UserId { get; set; }
+    public Guid UserId { get; set; }
 
     public Guid? ScreenshotId { get; set; }
 
@@ -16,5 +16,17 @@ public class Question
 
     public Answer? Solution { get; set; }
 
-    public List<Guid> Tags { get; set; } = [];
+    public List<Guid> Tags { get; set; }
+
+    public QuestionStatus Status { get; set; } = QuestionStatus.Open;
+
+    public Question(Guid id, string title, string text, Guid userId, Guid? screenshotId, IEnumerable<Guid> tagIds)
+    {
+        Id = id;
+        Title = title;
+        Text = text;
+        UserId = userId;
+        ScreenshotId = screenshotId;
+        Tags = [.. tagIds];
+    }
 }
