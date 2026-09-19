@@ -4,6 +4,8 @@ namespace Shared;
 
 public record Error
 {
+    public static readonly Error None = new(string.Empty, string.Empty, Errortype.None, null);
+
     public string Code { get; }
     public string Message { get; }
 
@@ -49,11 +51,19 @@ public record Error
     {
         return new Error(code ?? "internal.server.error", message, Errortype.InternalServerError);
     }
+
+    public Failure ToFailure()
+    {
+        return this;
+    }
 }
 
 public enum Errortype
 {
-    /// <summary> The request was invalid due to validation errors. /// </summary>
+    /// <summary> No error type specified. This is the default value and should not be used in practice. </summary>
+    None,
+
+    /// <summary> The request was invalid due to validation errors. </summary>
     Validation,
 
     /// <summary> The requested resource was not found. This could be due to an invalid identifier or the resource being deleted. </summary>

@@ -1,9 +1,10 @@
+using CSharpFunctionalExtensions;
 using DevQuestions.Application.Extensions;
-using DevQuestions.Application.Questions.Failures.Exceptions;
 using DevQuestions.Contracts.Questions;
 using DevQuestions.Domain.Questions;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace DevQuestions.Application.Questions;
 
@@ -23,12 +24,20 @@ public class QuestionsService : IQuestionsService
         _logger = logger;
     }
 
-    public async Task<Guid> Create(CreateQuestionDto questionDto, CancellationToken cancellationToken)
+    public async Task<Result<Guid, Failure>> Create(CreateQuestionDto questionDto, CancellationToken cancellationToken)
     {
         var validationResult = await _createQuestionValidator.ValidateAsync(questionDto, cancellationToken);
         if (!validationResult.IsValid)
         {
-            throw new QuestionValidationException(validationResult.ToErrors());
+            return validationResult.ToErrors();
+        }
+
+        var calculator = new QuestionCalculator();
+
+        var calculationResult = calculator.Calculate();
+        if (calculationResult.IsFailure)
+        {
+            return calculationResult.Error;
         }
 
         // Check if the question already exists (this is just a placeholder, you might want to implement a proper check)
@@ -37,7 +46,7 @@ public class QuestionsService : IQuestionsService
         int openUserQuestionsCount = await _questionsRepository.GetOpenUserQuestionsCountAsync(questionDto.UserId, cancellationToken);
         if (openUserQuestionsCount > 3)
         {
-            throw new TooManyQuestionsException();
+            return Failures.Errors.Questions.TooManyQuestions().ToFailure();
         }
 
         var questionId = Guid.NewGuid();
@@ -59,7 +68,8 @@ public class QuestionsService : IQuestionsService
             _logger.LogInformation("Question created with ID: {QuestionId}", questionId);
         }
 
-        return questionId;
+        // Wrap success value into a Result success
+        return Result.Success<Guid, Failure>(questionId);
     }
 
     public async Task Update(Guid id, UpdateQuestionDto updateQuestionDto, CancellationToken cancellationToken)
@@ -76,5 +86,14 @@ public class QuestionsService : IQuestionsService
 
     public async Task AddAnswer(Guid id, AddAnswerDto addAnswerDto, CancellationToken cancellationToken)
     {
+    }
+}
+
+public class QuestionCalculator
+{
+    public UnitResult<Failure> Calculate()
+    {
+        // Perform some calculations or validations here
+        return Error.Conflict(null, string.Empty).ToFailure();
     }
 }
