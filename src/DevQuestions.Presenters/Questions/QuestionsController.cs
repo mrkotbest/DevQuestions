@@ -1,6 +1,9 @@
+using CSharpFunctionalExtensions;
 using DevQuestions.Application.Questions;
 using DevQuestions.Contracts.Questions;
+using DevQuestions.Presenters.ResponseExtensions;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
 
 namespace DevQuestions.Presenters.Questions;
 
@@ -18,8 +21,9 @@ public class QuestionsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateQuestionDto createQuestionDto, CancellationToken cancellationToken)
     {
-        var questionId = await _questionsService.Create(createQuestionDto, cancellationToken);
-        return Ok(questionId);
+        Result<Guid, Failure> result = await _questionsService.Create(createQuestionDto, cancellationToken);
+
+        return result.IsFailure ? result.Error.ToResponse() : Ok(result.Value);
     }
 
     [HttpGet]
