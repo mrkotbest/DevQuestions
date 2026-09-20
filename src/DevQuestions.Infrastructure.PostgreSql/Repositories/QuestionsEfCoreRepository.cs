@@ -1,6 +1,9 @@
+using CSharpFunctionalExtensions;
 using DevQuestions.Application.Questions;
+using DevQuestions.Application.Questions.Failures;
 using DevQuestions.Domain.Questions;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace DevQuestions.Infrastructure.PostgreSql.Repositories;
 
@@ -29,20 +32,34 @@ public class QuestionsEfCoreRepository : IQuestionsRepository
 
     public async Task<Guid> SaveAsync(Question question, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _dbContext.Questions.Update(question);
+
+        await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return question.Id;
     }
 
-    public async Task<Question?> GetByIdAsync(Guid questionId, CancellationToken cancellationToken)
+    public async Task<Result<Question, Failure>> GetByIdAsync(Guid questionId, CancellationToken cancellationToken)
     {
         var question = await _dbContext.Questions
             .Include(q => q.Answers)
             .Include(q => q.Solution)
             .FirstOrDefaultAsync(q => q.Id == questionId, cancellationToken);
 
+        if (question == null)
+        {
+            return Errors.General.NotFound(questionId).ToFailure();
+        }
+
         return question;
     }
 
     public async Task<int> GetOpenUserQuestionsCountAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Guid> AddAnswerAsync(Answer answer, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
