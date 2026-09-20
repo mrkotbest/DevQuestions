@@ -8,7 +8,7 @@ public static class ResponseExtensions
 {
     public static ActionResult ToResponse(this Failure failure)
     {
-        if (failure.Any())
+        if (!failure.Any())
         {
             return new ObjectResult(null)
             {

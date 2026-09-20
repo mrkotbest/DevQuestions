@@ -1,4 +1,4 @@
-using DevQuestions.Application.Questions;
+using DevQuestions.Application.Abstractions;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,9 +8,15 @@ public static class DependecyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssembly(typeof(DependecyInjection).Assembly);
+        var assembly = typeof(DependecyInjection).Assembly;
 
-        services.AddScoped<IQuestionsService, QuestionsService>();
+        services.AddValidatorsFromAssembly(assembly);
+
+        services.Scan(scan => scan
+            .FromAssemblies(assembly)
+            .AddClasses(classes => classes.AssignableToAny(typeof(ICommandHandler<,>), typeof(ICommandHandler<>)))
+            .AsSelfWithInterfaces()
+            .WithScopedLifetime());
 
         return services;
     }
