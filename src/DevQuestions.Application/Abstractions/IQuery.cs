@@ -1,3 +1,3 @@
 namespace DevQuestions.Application.Abstractions;
 
-public interface ICommand;
+public interface IQuery;

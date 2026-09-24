@@ -5,7 +5,7 @@ using DevQuestions.Domain.Questions;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 
-namespace DevQuestions.Infrastructure.PostgreSql.Repositories;
+namespace DevQuestions.Infrastructure.PostgreSql.Questions;
 
 public class QuestionsEfCoreRepository : IQuestionsRepository
 {
@@ -54,12 +54,7 @@ public class QuestionsEfCoreRepository : IQuestionsRepository
         return question;
     }
 
-    public async Task<int> GetOpenUserQuestionsCountAsync(Guid userId, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Guid> AddAnswerAsync(Answer answer, CancellationToken cancellationToken)
+    public Task<int> GetOpenUserQuestionsCountAsync(Guid userId, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

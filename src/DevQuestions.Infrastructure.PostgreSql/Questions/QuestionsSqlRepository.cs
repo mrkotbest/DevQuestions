@@ -5,7 +5,7 @@ using DevQuestions.Application.Questions;
 using DevQuestions.Domain.Questions;
 using Shared;
 
-namespace DevQuestions.Infrastructure.PostgreSql.Repositories;
+namespace DevQuestions.Infrastructure.PostgreSql.Questions;
 
 public class QuestionsSqlRepository : IQuestionsRepository
 {
@@ -40,27 +40,22 @@ public class QuestionsSqlRepository : IQuestionsRepository
         return question.Id;
     }
 
-    public async Task<Guid> DeleteAsync(Guid questionId, CancellationToken cancellationToken)
+    public Task<Guid> DeleteAsync(Guid questionId, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Guid> SaveAsync(Question question, CancellationToken cancellationToken)
+    public Task<Result<Question, Failure>> GetByIdAsync(Guid questionId, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Question?> GetByIdAsync(Guid questionId, CancellationToken cancellationToken)
+    public Task<int> GetOpenUserQuestionsCountAsync(Guid userId, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<int> GetOpenUserQuestionsCountAsync(Guid userId, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<Result<Question, Failure>> IQuestionsRepository.GetByIdAsync(Guid questionId, CancellationToken cancellationToken)
+    public Task<Guid> SaveAsync(Question question, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

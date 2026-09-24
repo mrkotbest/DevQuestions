@@ -2,7 +2,7 @@ using CSharpFunctionalExtensions;
 using DevQuestions.Application.Abstractions;
 using Shared;
 
-namespace DevQuestions.Application.Questions.Features.SelectSolution;
+namespace DevQuestions.Application.Questions.Features.SelectSolutionCommand;
 
 public class SelectSolutionHandler : ICommandHandler<Guid, SelectSolutionCommand>
 {

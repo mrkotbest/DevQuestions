@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
@@ -6,8 +6,5 @@
     <ProjectReference Include="..\DevQuestions.Application\DevQuestions.Application.csproj" />
     <ProjectReference Include="..\DevQuestions.Contracts\DevQuestions.Contracts.csproj" />
     <ProjectReference Include="..\DevQuestions.Domain\DevQuestions.Domain.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comments\" />
   </ItemGroup>
 </Project>
