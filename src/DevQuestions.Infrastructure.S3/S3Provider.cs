@@ -8,4 +8,14 @@ public class S3Provider : IFileProvider
     {
         throw new NotImplementedException();
     }
+
+    public Task<string> GetUrlByIdAsync(Guid fileId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Dictionary<Guid, string>> GetUrlsByIdsAsync(IEnumerable<Guid> fileIds, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,4 +1,4 @@
-namespace DevQuestions.Infrastructure.PostgreSql.Seeders;
+namespace DevQuestions.Infrastructure.PostgreSql.Questions;
 
 public class QuestionsSeeder : ISeeder
 {
